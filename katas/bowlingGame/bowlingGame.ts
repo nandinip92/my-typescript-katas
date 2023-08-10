@@ -43,12 +43,15 @@ type SCORES = {
  * 1. Get the input of the game in string and split it by space
  * 2. assign totalScore = 0;
  * 3. When STRIKE is in the frame then
- *      totalScore+ = strike value 'X' + next to balls score
+ *      totalScore += strike value 'X' + next two balls score
  *  (3b) IF frame has a STRIKE followed by SPARE '/' then
  *      totalScore += StrikeValue + only SPAR value = 10 +10
- *
- *
- *
+ * 4. When SPAR is in the frame then
+ *      totalScore += sparValue + next ball score
+ * 5. When Number or Miss '-' then
+ *      5(a) IF the last but frame has a SPAR '/'.
+ *             Then do nothing
+ *          ELSE totalScoe += currentScoreValue
  *
  *
  */

@@ -72,8 +72,13 @@ export function bowlingGame(inputRolls: string): number {
     if (ball === "X" && index < rolls.length - 2) {
       const bonusBall1 = rolls[index + 1] as keyof SCORES;
       const bonusBall2 = rolls[index + 2] as keyof SCORES;
-      totalScore +=
-        scoreLookup[ball] + scoreLookup[bonusBall1] + scoreLookup[bonusBall2];
+      // IF the bonus ball is to be a SPARE then just add SPARE value i.e., 10
+      // ELSE add both bonus ball scores to the totalScore
+      if (bonusBall2 === "/") totalScore += scoreLookup[ball] + 10;
+      else {
+        totalScore +=
+          scoreLookup[ball] + scoreLookup[bonusBall1] + scoreLookup[bonusBall2];
+      }
     }
     // If it is not 'X' or '/' then it might be a number or '-' so add it to the score
     if (ball !== "X" && ball !== "/" && rolls[index + 1] !== "/") {

@@ -70,14 +70,12 @@ export function bowlingGame(inputRolls: string): number {
   rolls.forEach((ball, index) => {
     //if X then get the next two balls score
     if (ball === "X" && index < rolls.length - 2) {
-      const bonusBall1 = rolls[index + 1];
-      const bonusBall2 = rolls[index + 2];
+      const bonusBall1 = rolls[index + 1] as keyof SCORES;
+      const bonusBall2 = rolls[index + 2] as keyof SCORES;
       totalScore +=
-        scoreLookup[ball] +
-        scoreLookup[bonusBall1 as keyof SCORES] +
-        scoreLookup[bonusBall2 as keyof SCORES];
+        scoreLookup[ball] + scoreLookup[bonusBall1] + scoreLookup[bonusBall2];
     }
-    // If it is not 'X' or '/' then it might be a number or '-' so add to the scores
+    // If it is not 'X' or '/' then it might be a number or '-' so add it to the score
     if (ball !== "X" && ball !== "/" && rolls[index + 1] !== "/") {
       // IF the last roll is SPARE then ignoring the bonus roll and do NOTHING
       // as it was already taken care in the next IF statement

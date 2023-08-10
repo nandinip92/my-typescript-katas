@@ -73,10 +73,11 @@ export function bowlingGame(inputRolls: string): number {
   let totalScore = 0;
 
   rolls.forEach((ball, index) => {
-    //if X then get the next two balls score
+    // IF X then get the next two balls score
     if (ball === "X" && index < rolls.length - 2) {
       const bonusBall1 = rolls[index + 1] as keyof SCORES;
       const bonusBall2 = rolls[index + 2] as keyof SCORES;
+      // For STRIKE 'X' followed by SPAR '/'
       // IF the bonus ball is to be a SPARE then just add SPARE value i.e., 10
       // ELSE add both bonus ball scores to the totalScore
       if (bonusBall2 === "/") totalScore += scoreLookup[ball] + 10;
@@ -85,21 +86,21 @@ export function bowlingGame(inputRolls: string): number {
           scoreLookup[ball] + scoreLookup[bonusBall1] + scoreLookup[bonusBall2];
       }
     }
+    // IF SPAR '/' then adding the next ball
+    if (ball === "/" && index < rolls.length - 1) {
+      const bonusBall = rolls[index + 1];
+      totalScore += scoreLookup[ball] + scoreLookup[bonusBall as keyof SCORES];
+    }
+
     // If it is not 'X' or '/' then it might be a number or '-' so add it to the score
     if (ball !== "X" && ball !== "/" && rolls[index + 1] !== "/") {
-      // IF the last roll is SPARE then ignoring the bonus roll and do NOTHING
-      // as it was already taken care in the next IF statement
+      // IF the last roll is SPARE then ignore the bonus roll and do NOTHING
+      // as it was already taken care by the SPAR IF statement above
       // ELSE add it to the total score
       if (index === rolls.length - 1 && rolls[index - 1] === "/") {
       } else {
         totalScore += scoreLookup[ball as keyof SCORES];
       }
-    }
-
-    // if the '/' then adding the next ball
-    if (ball === "/" && index < rolls.length - 1) {
-      const bonusBall = rolls[index + 1];
-      totalScore += scoreLookup[ball] + scoreLookup[bonusBall as keyof SCORES];
     }
   });
   return totalScore;

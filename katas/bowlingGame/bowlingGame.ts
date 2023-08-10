@@ -65,14 +65,6 @@ export function bowlingGame(inputRolls: string): number {
   };
 
   let rolls = inputRolls.replace(/\s+/g, "").split("");
-  //   const frameCount = inputRolls.split(" ").length;
-
-  //   //checking the length of the frames and number of rolls
-  //   if (rolls.length > frameCount) {
-  //     const bonusRollsCount = rolls.length - frameCount;
-  //   }
-  //console.log(rolls);
-
   let totalScore = 0;
 
   rolls.forEach((ball, index) => {
@@ -86,8 +78,20 @@ export function bowlingGame(inputRolls: string): number {
         scoreLookup[bonusBall2 as keyof SCORES];
     }
     // If it is not 'X' or '/' then it might be a number or '-' so add to the scores
-    if (ball !== "X" && ball !== "/") {
-      totalScore += scoreLookup[ball as keyof SCORES];
+    if (ball !== "X" && ball !== "/" && rolls[index + 1] !== "/") {
+      // IF the last roll is SPARE then ignoring the bonus roll and do NOTHING
+      // as it was already taken care in the next IF statement
+      // ELSE add it to the total score
+      if (index === rolls.length - 1 && rolls[index - 1] === "/") {
+      } else {
+        totalScore += scoreLookup[ball as keyof SCORES];
+      }
+    }
+
+    // if the '/' then adding the next ball
+    if (ball === "/" && index < rolls.length - 1) {
+      const bonusBall = rolls[index + 1];
+      totalScore += scoreLookup[ball] + scoreLookup[bonusBall as keyof SCORES];
     }
   });
   return totalScore;

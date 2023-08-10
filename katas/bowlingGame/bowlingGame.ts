@@ -41,6 +41,11 @@ type SCORES = {
  *   | Psudo code |
  *   *------------*
  * 1. Get the input of the game in string and split it by space
+ * 2. assign totalScore = 0;
+ * 3. When STRIKE is in the frame then
+ *      totalScore+ = strike value 'X' + next to balls score
+ *  (3b) IF frame has a STRIKE followed by SPARE '/' then
+ *      totalScore += StrikeValue + only SPAR value = 10 +10
  *
  *
  *

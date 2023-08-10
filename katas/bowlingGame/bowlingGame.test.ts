@@ -31,5 +31,11 @@ describe("bowlingGame", () => {
     rolls = "1/ 36 72 36 44 53 33 45 81 26";
     //Action and Assert
     expect(bowlingGame(rolls)).toBe(88);
+
+    //Arrange
+    //rolls = "X 4/ 72 36 44 53 33 45 81 26";
+    rolls = "X 4/ 72 36 44 53 33 45 81 26";
+    // //Action and Assert
+    expect(bowlingGame(rolls)).toBe(103);
   });
 });

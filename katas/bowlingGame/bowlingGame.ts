@@ -1,3 +1,5 @@
+/* Kata Source : https://codingdojo.org/kata/Bowling/ */
+
 type SCORES = {
   "-": 0;
   "1": 1;
@@ -26,12 +28,12 @@ type SCORES = {
  *          so, TotalScore after 2 frames is 10+8= 26
  *
  * 3. If SPARE in first frame ----> you will get the values of the next balls as bonus.
- *      Eg: Fame1= 6 4 = STRIKE (/) and Frame2= 8 1
+ *      Eg: Frame1= 6 4 = STRIKE (/) and Frame2= 8 1
  *          Scores for Frame1= 6+4+8= 18 and Frame2= 8+1= 9
  *          so, TotalScore after two frames is 18+9 = 27
  *
  * 4. For FINAL FRAME:
- *      4.1 If STRIKE in the first delivery ----> opportunity to strike int he remaining two and have three deliveries
+ *      4.1 If STRIKE in the first delivery ----> opportunity to strike in the remaining two and have three deliveries
  *          4.1.1 If scored STRIKES in each of your final three deliveries, the score for the final frame world be 30(10+10+10)
  *      4.2 If SPARE in the final frame ----> You will get thirs delivery as bonus
  * Eg: a SPARE 9 and 1 followed by a strike = 20 (9+1+10)
@@ -51,7 +53,7 @@ type SCORES = {
  * 5. When Number or Miss '-' then
  *      5(a) IF the last but frame has a SPAR '/'.
  *             Then do nothing
- *          ELSE totalScoe += currentScoreValue
+ *          ELSE totalScore += currentBallValue
  *
  *
  */
@@ -80,7 +82,7 @@ export function bowlingGame(inputRolls: string): number {
     if (ball === "X" && index < rolls.length - 2) {
       const bonusBall1 = rolls[index + 1] as keyof SCORES;
       const bonusBall2 = rolls[index + 2] as keyof SCORES;
-      // For STRIKE 'X' followed by SPAR '/'
+      // For STRIKE 'X' followed by SPARE '/'
       // IF the bonus ball is to be a SPARE then just add SPARE value i.e., 10
       // ELSE add both bonus ball scores to the totalScore
       if (bonusBall2 === "/") totalScore += scoreLookup[ball] + 10;

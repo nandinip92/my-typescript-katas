@@ -91,14 +91,14 @@ export function bowlingGame(inputRolls: string): number {
     }
     // IF SPAR '/' then adding the next ball
     if (ball === "/" && index < rolls.length - 1) {
-      const bonusBall = rolls[index + 1];
-      totalScore += scoreLookup[ball] + scoreLookup[bonusBall as keyof SCORES];
+      const bonusBall = rolls[index + 1] as keyof SCORES;
+      totalScore += scoreLookup[ball] + scoreLookup[bonusBall];
     }
 
     // If it is not 'X' or '/' then it might be a number or '-' so add it to the score
     if (ball !== "X" && ball !== "/" && rolls[index + 1] !== "/") {
       // IF the last roll is SPARE then ignore the bonus roll and do NOTHING
-      // as it was already taken care by the SPAR IF statement above
+      // as it was already taken care by the SPARE IF statement above
       // ELSE add it to the total score
       if (index === rolls.length - 1 && rolls[index - 1] === "/") {
       } else {

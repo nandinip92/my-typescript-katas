@@ -1,3 +1,7 @@
+/*
+ * Following is the link from where I have taken some score for other test cases
+ * https://serg.cs.lth.se/fileadmin/serg/Experiment_Instruction_TDD.pdf
+ */
 import { bowlingGame } from "./bowlingGame";
 
 describe("bowlingGame", () => {
